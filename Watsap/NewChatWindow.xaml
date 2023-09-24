@@ -1,0 +1,29 @@
+﻿<Window x:Class="Watsap.NewChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Watsap"
+        mc:Ignorable="d"
+        Title="NewChatWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="339*"/>
+            <RowDefinition Height="51*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="118*"/>
+            <ColumnDefinition Width="567*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock TextWrapping="Wrap" Text="Пользователи" Margin="10,10,10,10" Grid.ColumnSpan="2"/>
+        <ListBox x:Name="usersLbx" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10" Grid.ColumnSpan="2"/>
+        <Button x:Name="logCheckBtn" Grid.Column="2" Content="Посмотреть историю" HorizontalAlignment="Center" Height="26" Margin="0,8,0,0" VerticalAlignment="Top" Width="548"/>
+        <Button x:Name="exitBtn" Content="Выйти" HorizontalAlignment="Center" Height="31" Grid.Row="2" VerticalAlignment="Center" Width="96"/>
+        <Button x:Name="sendBtn" Grid.Column="1" Content="Отправить" Height="31" Margin="10,0,10,0" Grid.Row="2" VerticalAlignment="Center"/>
+        <TextBox x:Name="messageTb" Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Text="Введите сообщение" Margin="10,10,10,10"/>
+        <ListBox x:Name="messagesLbx" Grid.Column="2" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10"/>
+
+    </Grid>
+</Window>
