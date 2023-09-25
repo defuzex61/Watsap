@@ -20,8 +20,8 @@
         <TextBlock TextWrapping="Wrap" Text="Пользователи" Margin="10,10,10,10" Grid.ColumnSpan="2"/>
         <ListBox x:Name="usersLbx" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10" Grid.ColumnSpan="2"/>
         <Button x:Name="logCheckBtn" Grid.Column="2" Content="Посмотреть историю" HorizontalAlignment="Center" Height="26" Margin="0,8,0,0" VerticalAlignment="Top" Width="548"/>
-        <Button x:Name="exitBtn" Content="Выйти" HorizontalAlignment="Center" Height="31" Grid.Row="2" VerticalAlignment="Center" Width="96"/>
-        <Button x:Name="sendBtn" Grid.Column="1" Content="Отправить" Height="31" Margin="10,0,10,0" Grid.Row="2" VerticalAlignment="Center"/>
+        <Button x:Name="exitBtn" Content="Выйти" HorizontalAlignment="Center" Height="31" Grid.Row="2" VerticalAlignment="Center" Width="96" Click="exitBtn_Click"/>
+        <Button x:Name="sendBtn" Grid.Column="1" Content="Отправить" Height="31" Margin="10,0,10,0" Grid.Row="2" VerticalAlignment="Center" Click="sendBtn_Click"/>
         <TextBox x:Name="messageTb" Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Text="Введите сообщение" Margin="10,10,10,10"/>
         <ListBox x:Name="messagesLbx" Grid.Column="2" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10"/>
 

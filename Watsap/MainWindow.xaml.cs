@@ -27,13 +27,14 @@ namespace Watsap
 
         private void newChatBtn_Click(object sender, RoutedEventArgs e)
         {
-            NewChatWindow newChat = new NewChatWindow();
+            NewChatWindow newChat = new NewChatWindow(ipTb.Text, userNameTb.Text);
             newChat.Show();
         }
 
         private void oldChatBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NewChatWindow newChat = new NewChatWindow(ipTb.Text, userNameTb.Text);
+            newChat.Show();
         }
     }
 }
