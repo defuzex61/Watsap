@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ namespace Watsap
     /// </summary>
     public partial class MainWindow : Window
     {
+        private NewChatWindow _newChat;
         public MainWindow()
         {
             InitializeComponent();
@@ -27,14 +29,27 @@ namespace Watsap
 
         private void newChatBtn_Click(object sender, RoutedEventArgs e)
         {
-            NewChatWindow newChat = new NewChatWindow(ipTb.Text, userNameTb.Text);
-            newChat.Show();
+            validation();  
         }
 
         private void oldChatBtn_Click(object sender, RoutedEventArgs e)
         {
-            NewChatWindow newChat = new NewChatWindow(ipTb.Text, userNameTb.Text);
-            newChat.Show();
+            validation();
+        }
+        private void validation()
+        {
+            Regex ipCheck = new Regex("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b\r\n");
+            Regex loginCheck = new Regex("^[a-zA-Z0-9_-]{3,16}$\r\n");
+
+            if (Regex.IsMatch(userNameTb.Text, loginCheck.ToString()) && Regex.IsMatch(ipTb.Text, ipCheck.ToString()))
+            {
+                _newChat = new NewChatWindow(ipTb.Text, userNameTb.Text);
+                _newChat.Show();
+            }
+            else
+            {
+                MessageBox.Show("Неправильно введено ip или имя пользователя!");
+            }
         }
     }
 }

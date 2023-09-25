@@ -35,11 +35,10 @@ namespace Watsap
             
             var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             _tcpServer = new TcpServer();
-            var serverTask = _tcpServer.StartServerAsync(serverSocket, messagesLbx, this.usersLbx); 
-
+            var serverTask = _tcpServer.StartServerAsync(serverSocket, messagesLbx, this.usersLbx);
             var clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             _tcpClient = new TcpClient(name, clientSocket, ip, messagesLbx, this.usersLbx);
-            _tcpClient.ReceiveMessage(_tcpClient._IsWorking.Token);
+            _tcpClient.ReceiveMessage(_tcpClient.IsWorking.Token);
             _tcpClient.SendMessage($"{name} подключился... /connect_username= {name}");
 
         }

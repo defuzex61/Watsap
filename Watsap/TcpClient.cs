@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Xml.Linq;
 
+
 namespace Watsap
 {
    
@@ -16,7 +17,7 @@ namespace Watsap
         public ListBox messages;
         public ListBox userBox;
         public string Name;
-        public CancellationTokenSource _IsWorking;
+        public CancellationTokenSource IsWorking;
         public Socket server;
 
         public TcpClient(string name,Socket server, string ip,ListBox box, ListBox userBox)
@@ -26,7 +27,7 @@ namespace Watsap
             Name = name;
             this.server = server;
             server.Connect(ip, 8888);
-            _IsWorking = new CancellationTokenSource();
+            IsWorking = new CancellationTokenSource();
             
 
         }
@@ -37,21 +38,22 @@ namespace Watsap
                 byte[] bytes = new byte[1024];
                 await server.ReceiveAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
                 string message = Encoding.UTF8.GetString(bytes);
-                string username;
-                if (message.Contains("/connect_username"))
+                string user = "";
+                if (message.Contains(" /connect_user"))
                 {
-                    username = message.Substring(message.LastIndexOf("/connect_username"));
-                    username = username.Remove(0, 19);
-                    message = message.Remove(message.LastIndexOf("/connect_username"));
-                    userBox.Items.Add($"[{username}]");
+                    user = message.Substring(message.LastIndexOf("/connect_user"));
+                    user = user.Remove(0, 19);
+                    message = message.Remove(message.LastIndexOf("/connect_user"));
+                    userBox.Items.Add($"[{user}]");
                 } 
                 if (message.Contains("/exit") || message == ("/disconnect"))
                 {
-                    
-                    _IsWorking.Cancel();
+                    await SendMessage($"{user} disconnected");
+                    Dispose();
                 }
             
-                messages.Items.Add(message);
+                messages.Items.Add($"{ DateTime.Now.ToString("HH:mm:ss")}: {message}");
+
             }
         }
         public async Task SendMessage(string message)
@@ -61,9 +63,9 @@ namespace Watsap
         }
         public void Dispose()
         {
-            _IsWorking.Cancel();
+            IsWorking.Cancel();
             SendMessage(null).Dispose();
-            ReceiveMessage(_IsWorking.Token).Dispose();
+            ReceiveMessage(IsWorking.Token).Dispose();
         }
     }
 

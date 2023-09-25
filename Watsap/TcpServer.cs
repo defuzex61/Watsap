@@ -24,7 +24,6 @@ namespace Watsap
     {
         private Socket _socket;
         private ListBox _messageBox,_userBox;
-        private List<string> _userList = new List<string>();
         private List<Socket> _clients = new List<Socket>();
         public async Task StartServerAsync( Socket socket, ListBox box, ListBox userBox)
         {
@@ -55,19 +54,22 @@ namespace Watsap
                 await client.ReceiveAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
                 string message = Encoding.UTF8.GetString(bytes);
                 string username = "";
-                if (message.Contains("/connect_username"))
+                
+                if (message.Contains("/connect_user"))
                 {
-                    username = message.Substring(message.LastIndexOf("/connect_username"));
+                    string messageWithTag = message;
+                    username = message.Substring(message.LastIndexOf("/connect_user"));
                     username = username.Remove(0, 19);
-                    message = message.Remove(message.LastIndexOf("/connect_username"));
+                    message = message.Remove(message.LastIndexOf("/connect_user"));
                     _userBox.Items.Add($"[{username}]");
+                    message = messageWithTag;
                 }
-                    foreach (var item in _clients)
+                
+                _messageBox.Items.Add($"Sended:{DateTime.Now.ToString("HH:mm:ss")}\tsenderIP: {client.RemoteEndPoint} \nmessage sended to clients:\n {message}");
+                foreach (var item in _clients)
                 {
                     SendMessage(item, message);
                 }
-                _messageBox.Items.Add($"Time of sending:{DateTime.Now.ToString("HH:mm:ss")}\tsenderIP:{client.RemoteEndPoint} \nmessage sended to clients:\n{message}");
-                _userBox.ItemsSource = _userList;
 
             }
         } 
