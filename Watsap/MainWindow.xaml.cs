@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -29,19 +30,30 @@ namespace Watsap
 
         private void newChatBtn_Click(object sender, RoutedEventArgs e)
         {
-            validation();  
+            Validation();  
         }
 
         private void oldChatBtn_Click(object sender, RoutedEventArgs e)
         {
-            validation();
+            Validation();
         }
-        private void validation()
+        private static bool ValidateIpAddress(string ipAddress)
         {
-            Regex ipCheck = new Regex("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b\r\n");
-            Regex loginCheck = new Regex("^[a-zA-Z0-9_-]{3,16}$\r\n");
+            IPAddress address;
+            bool isValidIpAddress = IPAddress.TryParse(ipAddress, out address);
 
-            if (Regex.IsMatch(userNameTb.Text, loginCheck.ToString()) && Regex.IsMatch(ipTb.Text, ipCheck.ToString()))
+            return isValidIpAddress;
+        }
+        private static bool ValidateUsername(string username)
+        {
+            string pattern = @"^[a-zA-Z0-9_\-]+$";
+            bool isValidUsername = Regex.IsMatch(username, pattern);
+
+            return isValidUsername;
+        }
+        private void Validation()
+        {
+            if (ValidateIpAddress(ipTb.Text) == true && ValidateUsername(userNameTb.Text) == true)
             {
                 _newChat = new NewChatWindow(ipTb.Text, userNameTb.Text);
                 _newChat.Show();
