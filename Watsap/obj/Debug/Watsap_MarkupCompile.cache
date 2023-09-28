@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\user\source\repos\Watsap\Watsap\obj\Debug\
+C:\Users\defuzex61\source\repos\WatsapMVVM\Watsap\obj\Debug\
 Watsap
 none
 false
 DEBUG;TRACE
-C:\Users\user\source\repos\Watsap\Watsap\App.xaml
-2-164833425
+C:\Users\defuzex61\source\repos\WatsapMVVM\Watsap\App.xaml
+2-1124237047
 
-81981593987
+11-1554592033
 13-1310406943
-MainWindow.xaml;NewChatWindow.xaml;
+View\MainWindow.xaml;View\NewChatWindow.xaml;
 
 False
 

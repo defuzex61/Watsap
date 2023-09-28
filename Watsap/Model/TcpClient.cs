@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Xml.Linq;
+using Watsap.ViewModel;
 
 
 namespace Watsap
@@ -19,6 +20,7 @@ namespace Watsap
         public string Name;
         public CancellationTokenSource IsWorking;
         public Socket server;
+       
 
         public TcpClient(string name,Socket server, string ip,ListBox box, ListBox userBox)
         {
@@ -31,6 +33,8 @@ namespace Watsap
             
 
         }
+
+
         public async Task ReceiveMessage(CancellationToken token)
         {
             while (!token.IsCancellationRequested)

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("watsap2.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("view/watsap.png")]
 
 
